@@ -1955,7 +1955,8 @@ function Cobrancas({ showToast }) {
   const excluirCliente = async (id, nome) => {
     if (!confirm(`Remover "${nome}"?`)) return;
     const sb = getSB();
-    await sb.from('billing_clients').delete().eq('id', id);
+    const { error } = await sb.from('billing_clients').delete().eq('id', id);
+    if (error) { showToast('Erro ao excluir: ' + error.message); return; }
     carregarClientes();
     showToast('Cliente removido');
   };
@@ -1999,7 +2000,7 @@ function Cobrancas({ showToast }) {
         body: JSON.stringify({ tipo: 'atraso', client_id: cliente.id, mensagem: template })
       });
       const d = await r.json();
-      showToast(d.ok ? `Atraso notificado para ${cliente.nome} ✓` : 'Erro ao enviar');
+      showToast(r.ok ? `Atraso notificado para ${cliente.nome} ✓` : 'Erro ao enviar: ' + (d?.error || d?.message || 'tente novamente'));
       carregarLog();
     } catch (e) { showToast('Erro: ' + e.message); }
   };
