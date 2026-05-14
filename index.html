@@ -2000,7 +2000,7 @@ function Cobrancas({ showToast }) {
         body: JSON.stringify({ tipo: 'atraso', client_id: cliente.id, mensagem: template })
       });
       const d = await r.json();
-      showToast(r.ok ? `Atraso notificado para ${cliente.nome} ✓` : 'Erro ao enviar: ' + (d?.error || d?.message || 'tente novamente'));
+      showToast(d.ok ? `Atraso notificado para ${cliente.nome} ✓` : 'Erro ao enviar: ' + (d?.error || d?.message || 'tente novamente'));
       carregarLog();
     } catch (e) { showToast('Erro: ' + e.message); }
   };
