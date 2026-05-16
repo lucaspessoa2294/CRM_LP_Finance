@@ -11,7 +11,7 @@
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>h
 <style>
   :root {
     --navy: #0B1E3F;
@@ -1963,7 +1963,7 @@ function Cobrancas({ showToast }) {
 
   const salvarTemplates = () => {
     localStorage.setItem('lp_msg_venc', msgVenc);
-    localStorage.setItem('lp_msg_atraso', msgAtraso);
+    localStorage.setItem('lp_msg_atraso', msgAtraso);    supabase.from('billing_templates').upsert({id:'main',msg_vencimento:msgVenc,msg_atraso:msgAtraso});
     showToast('Mensagens salvas ✓');
   };
 
